@@ -5,6 +5,7 @@
 package com.SIG.View;
 
 import com.SIG.InvoicesCreation.NewHeaderInv;
+import com.SIG.InvoicesCreation.NewLineInv;
 import com.SIG.Model.InvHeaderTable;
 import com.SIG.Model.InvLineTable;
 import com.SIG.Model.InvoiceHeader;
@@ -86,6 +87,11 @@ public class SIGMainUI extends javax.swing.JFrame implements ActionListener , Li
 
         CreateInvoice.setText("Create New Invoice");
         CreateInvoice.setActionCommand("CreateInvoice");
+        CreateInvoice.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CreateInvoiceActionPerformed(evt);
+            }
+        });
 
         DeleteInvoice.setText("Delete Invoice");
         DeleteInvoice.setActionCommand("DeleteInvoice");
@@ -263,6 +269,10 @@ public class SIGMainUI extends javax.swing.JFrame implements ActionListener , Li
         // TODO add your handling code here:
     }//GEN-LAST:event_LineCusNameActionPerformed
 
+    private void CreateInvoiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateInvoiceActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CreateInvoiceActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -327,6 +337,7 @@ public class SIGMainUI extends javax.swing.JFrame implements ActionListener , Li
    private InvHeaderTable invHTable;
    private InvLineTable  invLTable;
    private NewHeaderInv newInv;
+   private NewLineInv newLineInv;
     @Override
     public void actionPerformed(ActionEvent e) {
         switch(e.getActionCommand())
@@ -344,7 +355,7 @@ public class SIGMainUI extends javax.swing.JFrame implements ActionListener , Li
                 System.out.println("YaRAAAAAAAAAB");
                 break;
              case "SaveItem" :
-                SaveData();
+                ShowNewLineScreen();
                 break;
              case "CancelItem" :
                 CancelChanges();
@@ -355,6 +366,16 @@ public class SIGMainUI extends javax.swing.JFrame implements ActionListener , Li
             case "NewInvCancelBTN" :
                 CancelInvUpdates();
                 break;
+                
+            case "NewInvLineOkBTN" :
+               // SaveNewLineData();
+                break;
+                
+            case "NewInvLineCancelBTN" :
+                CancelNewLineDialog();
+                break;
+                
+               
             default:
                 System.out.println("Defffault");
         }
@@ -498,10 +519,6 @@ public class SIGMainUI extends javax.swing.JFrame implements ActionListener , Li
         
     }
     
-    // Save New Invoice Header Data When Click Ok btn from Dialogue
-    private void SaveData() {
-        
-    }
 
     private void CancelChanges() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
@@ -540,5 +557,23 @@ public class SIGMainUI extends javax.swing.JFrame implements ActionListener , Li
           
         }
         return   current +1;
+    }
+
+    private void ShowNewLineScreen() {
+        newLineInv = new NewLineInv(this);
+        newLineInv.setVisible(true);
+        
+    }
+
+    private void CancelNewLineDialog() {
+        newLineInv.setVisible(false);
+    }
+
+    private void SaveNewLineData() {
+        String Itemname = newLineInv.getLineItemName().getText();
+        int ItemPrice =Integer.parseInt(newLineInv.getLineItemPrice().getText());
+        double ItemCount =Double.parseDouble(newLineInv.getLineItemCount().getText());
+       // InvoiceLine invLine = 
+        
     }
 }

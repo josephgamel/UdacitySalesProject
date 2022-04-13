@@ -30,7 +30,7 @@ public class NewHeaderInv extends JDialog{
         OkBTN = new JButton("OK");
         CancelBTN = new JButton("Cancel");
         OkBTN.setActionCommand("NewInvOkBTN");
-        CancelBTN.setActionCommand("NewInvCancelBTN");
+        CancelBTN.setActionCommand("NewLineCancelBTN");
         
         OkBTN.addActionListener(mainView);
         CancelBTN.addActionListener(mainView);
