@@ -1,0 +1,10 @@
+com\SIG\Model\InvoiceHeader.class
+com\SIG\View\SIGMainUI$1.class
+com\SIG\View\SIGMainUI$3.class
+com\SIG\View\SIGMainUI$2.class
+com\SIG\Model\InvHeaderTable.class
+com\SIG\View\SIGMainUI.class
+com\SIG\InvoicesCreation\NewHeaderInv.class
+com\SIG\Model\InvoiceLine.class
+com\SIG\View\SIGMainUI$4.class
+com\SIG\Model\InvLineTable.class
