@@ -280,7 +280,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="SaveItem" min="-2" max="-2" attributes="0"/>
                   <EmptySpace pref="154" max="32767" attributes="0"/>
-                  <Component id="CancelItem" min="-2" max="-2" attributes="0"/>
+                  <Component id="DeleteLine" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -291,7 +291,7 @@
                   <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="SaveItem" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="CancelItem" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="DeleteLine" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="51" max="32767" attributes="0"/>
               </Group>
@@ -308,13 +308,13 @@
             <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="SaveItem.addActionListener(this);&#xd;&#xa;"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JButton" name="CancelItem">
+        <Component class="javax.swing.JButton" name="DeleteLine">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Cancel"/>
-            <Property name="actionCommand" type="java.lang.String" value="CancelItem"/>
+            <Property name="text" type="java.lang.String" value="Delete"/>
+            <Property name="actionCommand" type="java.lang.String" value="DeleteLine"/>
           </Properties>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="CancelItem.addActionListener(this);&#xd;&#xa;"/>
+            <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="DeleteLine.addActionListener(this);&#xd;&#xa;"/>
           </AuxValues>
         </Component>
       </SubComponents>

@@ -73,8 +73,8 @@ public class SIGMainUI extends javax.swing.JFrame implements ActionListener , Li
         jPanel1 = new javax.swing.JPanel();
         SaveItem = new javax.swing.JButton();
         SaveItem.addActionListener(this);
-        CancelItem = new javax.swing.JButton();
-        CancelItem.addActionListener(this);
+        DeleteLine = new javax.swing.JButton();
+        DeleteLine.addActionListener(this);
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         LoadFile = new javax.swing.JMenuItem();
@@ -151,8 +151,8 @@ public class SIGMainUI extends javax.swing.JFrame implements ActionListener , Li
         SaveItem.setText("Save");
         SaveItem.setActionCommand("SaveItem");
 
-        CancelItem.setText("Cancel");
-        CancelItem.setActionCommand("CancelItem");
+        DeleteLine.setText("Delete");
+        DeleteLine.setActionCommand("DeleteLine");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -162,7 +162,7 @@ public class SIGMainUI extends javax.swing.JFrame implements ActionListener , Li
                 .addContainerGap()
                 .addComponent(SaveItem)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 154, Short.MAX_VALUE)
-                .addComponent(CancelItem)
+                .addComponent(DeleteLine)
                 .addGap(55, 55, 55))
         );
         jPanel1Layout.setVerticalGroup(
@@ -171,7 +171,7 @@ public class SIGMainUI extends javax.swing.JFrame implements ActionListener , Li
                 .addGap(27, 27, 27)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(SaveItem)
-                    .addComponent(CancelItem))
+                    .addComponent(DeleteLine))
                 .addContainerGap(51, Short.MAX_VALUE))
         );
 
@@ -327,9 +327,9 @@ public class SIGMainUI extends javax.swing.JFrame implements ActionListener , Li
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton CancelItem;
     private javax.swing.JButton CreateInvoice;
     private javax.swing.JButton DeleteInvoice;
+    private javax.swing.JButton DeleteLine;
     private javax.swing.JTable HeaderInvTable;
     private javax.swing.JTable InvoicesLineTable;
     private javax.swing.JTextField LineCusName;
@@ -372,8 +372,13 @@ public class SIGMainUI extends javax.swing.JFrame implements ActionListener , Li
                 getNewInvData();
                 break;
              case "DeleteInvoice" :
-                System.out.println("YaRAAAAAAAAAB");
+                DeleteInvHeader();
                 break;
+            
+             case "DeleteLine" :
+                deleteInvLine();
+                break;
+                
              case "SaveItem" :
                 ShowNewLineScreen();
                 break;
@@ -555,8 +560,9 @@ public class SIGMainUI extends javax.swing.JFrame implements ActionListener , Li
             InvoiceHeader newInvObj = new InvoiceHeader(newInvNum, newInvDate, newCustomerName);
             invHeaderList.add(newInvObj);
             System.out.println("Date is : "+ newInvDate +  "andNum is "+newInvNum + "and Name is : "+newCustomerName);
-
+            newInv.setVisible(false);
             invHTable.fireTableDataChanged();
+            
         } catch (ParseException ex) {
             Logger.getLogger(SIGMainUI.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -595,22 +601,48 @@ public class SIGMainUI extends javax.swing.JFrame implements ActionListener , Li
         int ItemCount =Integer.parseInt(newLineInv.getLineItemCount().getText());
         newLineInv.setVisible(false);
         System.err.println("Dataaaaaaa  name "+Itemname + " - price " + ItemPrice + " - count " +  ItemCount );
-        int headerIndex =InvoicesLineTable.getSelectedRow();
-        
-       InvoiceHeader invHead =  invHTable.getInvList().get(headerIndex+1);
-        
+        int headerIndex =HeaderInvTable.getSelectedRow();
+       //HeaderInvTable
+        System.out.println("CURRREEEEEENT : " + headerIndex);
+       InvoiceHeader invHead =  invHTable.getInvList().get(headerIndex);
+       
         
        InvoiceLine invL = new InvoiceLine(invHead, ItemCount, ItemPrice, Itemname);
         
         invHead.addInvoiceLine(invL);
        
-        invLTable.getInvLines().add(invL);
-        invLTable.fireTableDataChanged();
-//        InvoiceHeader invH= invHeaderList.getInvList().get(headerIndex-1);
-//        System.err.println("Hello  "+invH);
-//     InvoiceLine invLine = new InvoiceLine(invH, ItemCount, ItemPrice, Itemname);
-//    invLine.setInvHeader(invH);
-//    invHeaderList.add(invH);
+      //  invLTable.getInvLines().add(invL);
+        
+        
+        LineInvTotal.setText(""+invHead.getInvHeaderTotal());
+      invLTable.fireTableDataChanged();
+        invHTable.fireTableDataChanged();
+
     
+    }
+
+    private void deleteInvLine() {
+        int lineIndex = InvoicesLineTable.getSelectedRow();
+    InvoiceLine i =  invLTable.getInvLines().get(lineIndex);
+        invLTable.getInvLines().remove(lineIndex);
+        invLTable.fireTableDataChanged();
+        invHTable.fireTableDataChanged();
+        
+        LineInvTotal.setText(""+i.getItemTotal());
+    }
+
+    private void DeleteInvHeader() {
+        int invHindex = HeaderInvTable.getSelectedRow();
+        InvoiceHeader invH = invHTable.getInvList().get(invHindex);
+        invHTable.getInvList().remove(invH);
+        invHTable.fireTableDataChanged();
+     //   invLTable = new InvLineTable(new ArrayList<InvoiceLine>());
+       invLTable = new InvLineTable(new ArrayList<InvoiceLine>());
+       InvoicesLineTable.setModel(invLTable);
+       invLTable.fireTableDataChanged();
+        LineInvNum.setText("");
+           LineInvDate.setText("");
+           LineCusName.setText("");
+           LineInvTotal.setText("");
     }
 }
