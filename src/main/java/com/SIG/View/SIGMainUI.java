@@ -67,13 +67,14 @@ public class SIGMainUI extends javax.swing.JFrame implements ActionListener , Li
         jLabel7 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         InvoicesLineTable = new javax.swing.JTable();
+        LineInvDate = new javax.swing.JTextField();
+        LineCusName = new javax.swing.JTextField();
+        LineInvTotal = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
         SaveItem = new javax.swing.JButton();
         SaveItem.addActionListener(this);
         CancelItem = new javax.swing.JButton();
         CancelItem.addActionListener(this);
-        LineInvDate = new javax.swing.JTextField();
-        LineCusName = new javax.swing.JTextField();
-        LineInvTotal = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         LoadFile = new javax.swing.JMenuItem();
@@ -133,12 +134,6 @@ public class SIGMainUI extends javax.swing.JFrame implements ActionListener , Li
         ));
         jScrollPane2.setViewportView(InvoicesLineTable);
 
-        SaveItem.setText("Save");
-        SaveItem.setActionCommand("SaveItem");
-
-        CancelItem.setText("Cancel");
-        CancelItem.setActionCommand("CancelItem");
-
         LineInvDate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 LineInvDateActionPerformed(evt);
@@ -152,6 +147,33 @@ public class SIGMainUI extends javax.swing.JFrame implements ActionListener , Li
         });
 
         LineInvTotal.setText("jLabel4");
+
+        SaveItem.setText("Save");
+        SaveItem.setActionCommand("SaveItem");
+
+        CancelItem.setText("Cancel");
+        CancelItem.setActionCommand("CancelItem");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(SaveItem)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 154, Short.MAX_VALUE)
+                .addComponent(CancelItem)
+                .addGap(55, 55, 55))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(SaveItem)
+                    .addComponent(CancelItem))
+                .addContainerGap(51, Short.MAX_VALUE))
+        );
 
         jMenu1.setText("File");
 
@@ -207,13 +229,11 @@ public class SIGMainUI extends javax.swing.JFrame implements ActionListener , Li
                             .addComponent(LineInvTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(LineInvDate, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
                             .addComponent(LineCusName))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(29, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(SaveItem)
-                .addGap(77, 77, 77)
-                .addComponent(CancelItem)
-                .addGap(183, 183, 183))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(81, 81, 81))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -247,11 +267,9 @@ public class SIGMainUI extends javax.swing.JFrame implements ActionListener , Li
                         .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(36, 36, 36)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(SaveItem)
-                    .addComponent(CancelItem))
-                .addContainerGap(449, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(395, Short.MAX_VALUE))
         );
 
         pack();
@@ -329,6 +347,7 @@ public class SIGMainUI extends javax.swing.JFrame implements ActionListener , Li
     private javax.swing.JLabel jLabel7;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
@@ -338,6 +357,7 @@ public class SIGMainUI extends javax.swing.JFrame implements ActionListener , Li
    private InvLineTable  invLTable;
    private NewHeaderInv newInv;
    private NewLineInv newLineInv;
+  
     @Override
     public void actionPerformed(ActionEvent e) {
         switch(e.getActionCommand())
@@ -368,7 +388,7 @@ public class SIGMainUI extends javax.swing.JFrame implements ActionListener , Li
                 break;
                 
             case "NewInvLineOkBTN" :
-               // SaveNewLineData();
+               SaveNewLineData();
                 break;
                 
             case "NewInvLineCancelBTN" :
@@ -571,9 +591,26 @@ public class SIGMainUI extends javax.swing.JFrame implements ActionListener , Li
 
     private void SaveNewLineData() {
         String Itemname = newLineInv.getLineItemName().getText();
-        int ItemPrice =Integer.parseInt(newLineInv.getLineItemPrice().getText());
-        double ItemCount =Double.parseDouble(newLineInv.getLineItemCount().getText());
-       // InvoiceLine invLine = 
+        double ItemPrice =Double.parseDouble(newLineInv.getLineItemPrice().getText());
+        int ItemCount =Integer.parseInt(newLineInv.getLineItemCount().getText());
+        newLineInv.setVisible(false);
+        System.err.println("Dataaaaaaa  name "+Itemname + " - price " + ItemPrice + " - count " +  ItemCount );
+        int headerIndex =InvoicesLineTable.getSelectedRow();
         
+       InvoiceHeader invHead =  invHTable.getInvList().get(headerIndex+1);
+        
+        
+       InvoiceLine invL = new InvoiceLine(invHead, ItemCount, ItemPrice, Itemname);
+        
+        invHead.addInvoiceLine(invL);
+       
+        invLTable.getInvLines().add(invL);
+        invLTable.fireTableDataChanged();
+//        InvoiceHeader invH= invHeaderList.getInvList().get(headerIndex-1);
+//        System.err.println("Hello  "+invH);
+//     InvoiceLine invLine = new InvoiceLine(invH, ItemCount, ItemPrice, Itemname);
+//    invLine.setInvHeader(invH);
+//    invHeaderList.add(invH);
+    
     }
 }

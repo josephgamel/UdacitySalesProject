@@ -53,6 +53,10 @@ public class InvoiceHeader {
         return invLine;
     }
     
+    public void addInvoiceLine(InvoiceLine l){
+        getInvLines().add(l);
+    }
+    
     public double getInvHeaderTotal()
     {
         double total = 0.0;
