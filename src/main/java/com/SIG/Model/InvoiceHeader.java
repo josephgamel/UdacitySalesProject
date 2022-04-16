@@ -66,6 +66,7 @@ public class InvoiceHeader {
         return total;
     }
     
-    public String saveHeaferDataToCSV()
-    
+    public String saveInvHeaderDataToCSV(){
+            return "" + getInvoiceNumber() +"," + getInvoiceDate() +"," +getCustomerName();
+    }
 }

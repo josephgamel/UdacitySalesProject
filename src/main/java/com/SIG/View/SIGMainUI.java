@@ -16,6 +16,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Date;
 import java.text.DateFormat;
@@ -26,6 +27,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
@@ -107,29 +109,22 @@ public class SIGMainUI extends javax.swing.JFrame implements ActionListener , Li
 
         HeaderInvTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
         jScrollPane1.setViewportView(HeaderInvTable);
-
-        LineInvNum.setText("jLabel4");
 
         jLabel7.setText("Invoice Items");
 
         InvoicesLineTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
-                "No.", "Item Name", "Item Price", "Count", "Item Total"
+
             }
         ));
         jScrollPane2.setViewportView(InvoicesLineTable);
@@ -146,12 +141,10 @@ public class SIGMainUI extends javax.swing.JFrame implements ActionListener , Li
             }
         });
 
-        LineInvTotal.setText("jLabel4");
-
         SaveItem.setText("Save");
         SaveItem.setActionCommand("SaveItem");
 
-        DeleteLine.setText("Delete");
+        DeleteLine.setText("Cancel");
         DeleteLine.setActionCommand("DeleteLine");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -203,22 +196,24 @@ public class SIGMainUI extends javax.swing.JFrame implements ActionListener , Li
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(12, 12, 12)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 401, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(CreateInvoice)
                                 .addGap(18, 18, 18)
-                                .addComponent(DeleteInvoice)))
-                        .addGap(18, 18, 18)
+                                .addComponent(DeleteInvoice)))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(2, 2, 2)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel7)
                             .addComponent(jLabel6)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(252, 252, 252)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
                             .addComponent(jLabel5)
@@ -227,13 +222,13 @@ public class SIGMainUI extends javax.swing.JFrame implements ActionListener , Li
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(LineInvNum)
                             .addComponent(LineInvTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(LineInvDate, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
-                            .addComponent(LineCusName))))
-                .addContainerGap(29, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(81, 81, 81))
+                            .addComponent(LineInvDate)
+                            .addComponent(LineCusName, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(52, 52, 52)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -366,7 +361,7 @@ public class SIGMainUI extends javax.swing.JFrame implements ActionListener , Li
                 LoadInvHeaderFile();
                 break;
              case "SaveFile" :
-                System.out.println("YaRAAAAAAAAAB");
+                SaveToCSV();
                 break;
              case "CreateInvoice" :
                 getNewInvData();
@@ -644,5 +639,46 @@ public class SIGMainUI extends javax.swing.JFrame implements ActionListener , Li
            LineInvDate.setText("");
            LineCusName.setText("");
            LineInvTotal.setText("");
+    }
+
+    private void SaveToCSV() {
+        String header ="";
+        String lines = "";
+        for (InvoiceHeader inH : invHeaderList)
+        {
+            header += inH.saveInvHeaderDataToCSV();
+            header += "\n";
+            for (InvoiceLine invL : inH.getInvLines())
+            {
+                lines += invL.saveInvLineDataToCSV();
+                lines += "\n";
+            }
+        }
+        JOptionPane.showMessageDialog(this, "Select Header File to Save");
+        JFileChooser filechoose = new JFileChooser();
+        int selectedFile = filechoose.showSaveDialog(this);
+        if (selectedFile == JFileChooser.APPROVE_OPTION) {
+           File headerFile =  filechoose.getSelectedFile();
+            try {
+                FileWriter headerFileWrite = new FileWriter(headerFile);
+                headerFileWrite.write(header);
+                headerFileWrite.flush();
+                headerFileWrite.close();
+                  int selectedLinesFile = filechoose.showSaveDialog(this);
+                if (selectedLinesFile == JFileChooser.APPROVE_OPTION) {
+                     File linesFile =  filechoose.getSelectedFile();
+            
+                FileWriter linesFileWrite = new FileWriter(linesFile);
+                linesFileWrite.write(lines);
+                linesFileWrite.flush();
+                linesFileWrite.close();
+            }
+                
+            } catch (IOException ex) {
+                Logger.getLogger(SIGMainUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+        
     }
 }
