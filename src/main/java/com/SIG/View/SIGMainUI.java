@@ -3,7 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package com.SIG.View;
-
+import org.apache.commons.io.FilenameUtils;
+//import java.lang.Object;
 import com.SIG.InvoicesCreation.NewHeaderInv;
 import com.SIG.InvoicesCreation.NewLineInv;
 import com.SIG.Model.InvHeaderTable;
@@ -410,8 +411,15 @@ public class SIGMainUI extends javax.swing.JFrame implements ActionListener , Li
         int choosenHeaderFile = fileChoose.showOpenDialog(this);
         if (choosenHeaderFile == JFileChooser.APPROVE_OPTION) {
                 File headerFile = fileChoose.getSelectedFile();
+              String headerExtensionFormat=   headerFile.getAbsolutePath();
+                 boolean IsExtensionCSV=  FilenameUtils.isExtension(headerExtensionFormat, "csv");
+                      
+                        
                 
             try {
+                  if (IsExtensionCSV==true) {
+                            
+                        
                 FileReader readHFile = new FileReader(headerFile);
                 BufferedReader bfHeader = new BufferedReader(readHFile);
                 String line = null;
@@ -446,6 +454,10 @@ public class SIGMainUI extends javax.swing.JFrame implements ActionListener , Li
                     int choosenLineFile = fileChoose.showOpenDialog(this);
                     if (choosenLineFile == JFileChooser.APPROVE_OPTION) {
                         File headerFile1 = fileChoose.getSelectedFile();
+                   String linesExtensionFormat=   headerFile.getAbsolutePath();
+               
+                       
+                                
                     FileReader LineFile = new FileReader(headerFile1);
                     BufferedReader bfLine= new BufferedReader(LineFile);
                     String linex = null;
@@ -477,10 +489,17 @@ public class SIGMainUI extends javax.swing.JFrame implements ActionListener , Li
                     
                     }
                     
-            
+                  }
+                  else {
+               
+                   JOptionPane.showMessageDialog(null, "File Extension Must be CSV !","Hey!", JOptionPane.ERROR_MESSAGE);
+                  System.out.println("Not CSV");
+                  }
             } catch (FileNotFoundException ex) {
                 Logger.getLogger(SIGMainUI.class.getName()).log(Level.SEVERE, null, ex);
             }
+            
+           
                 
             }
         
