@@ -43,20 +43,20 @@ public class SIGMainUI extends javax.swing.JFrame implements ActionListener , Li
      */
     public SIGMainUI() {
         initComponents();
-        JOptionPane.showMessageDialog(this, "Welcome to 'Sales Invoice Generator' Application "
-        + "\n" + "hera are Some Tips to Use your App"
-        );
-        
-        JOptionPane.showMessageDialog(this, "First Load Invoice Header and Invoice Line Files"
-        + "\n" + "from 'File' Menu"
-        );
-        
-         JOptionPane.showMessageDialog(this, "then you Can Add and Delete Invoice."
-        + "\n" + "or you Can Add and Delete Invoice Line."
-         + "\n" + "Finally you Can Save the New Data to CSV Files."
-        );
-       
-      JOptionPane.showMessageDialog(this, "Let's Go :) ");
+//        JOptionPane.showMessageDialog(this, "Welcome to 'Sales Invoice Generator' Application "
+//        + "\n" + "hera are Some Tips to Use your App"
+//        );
+//        
+//        JOptionPane.showMessageDialog(this, "First Load Invoice Header and Invoice Line Files"
+//        + "\n" + "from 'File' Menu"
+//        );
+//        
+//         JOptionPane.showMessageDialog(this, "then you Can Add and Delete Invoice."
+//        + "\n" + "or you Can Add and Delete Invoice Line."
+//         + "\n" + "Finally you Can Save the New Data to CSV Files."
+//        );
+//       
+//      JOptionPane.showMessageDialog(this, "Let's Go :) ");
     }
     
     /**
@@ -453,15 +453,18 @@ public class SIGMainUI extends javax.swing.JFrame implements ActionListener , Li
                     
                     int choosenLineFile = fileChoose.showOpenDialog(this);
                     if (choosenLineFile == JFileChooser.APPROVE_OPTION) {
-                        File headerFile1 = fileChoose.getSelectedFile();
-                   String linesExtensionFormat=   headerFile.getAbsolutePath();
-               
-                       
+                        File lineFile = fileChoose.getSelectedFile();
+                   String linesExtensionFormat= lineFile.getAbsolutePath();
+               boolean IsLineExtensionCSV=  FilenameUtils.isExtension(linesExtensionFormat, "csv");
+                        System.out.println("Lines Format is : "+IsLineExtensionCSV);
+                     if (IsLineExtensionCSV==true) {
                                 
-                    FileReader LineFile = new FileReader(headerFile1);
-                    BufferedReader bfLine= new BufferedReader(LineFile);
-                    String linex = null;
-                    try {
+                        FileReader LineFile = new FileReader(lineFile);
+                        BufferedReader bfLine= new BufferedReader(LineFile);
+                        String linex = null;
+                        
+                        
+                        try {
                         while ((linex = bfLine.readLine()) != null) {
                             String[] LineFileContent = linex.split(",");
                             String lineInvNumValue = LineFileContent[0];
@@ -486,7 +489,16 @@ public class SIGMainUI extends javax.swing.JFrame implements ActionListener , Li
                     } catch (IOException ex) {
                         Logger.getLogger(SIGMainUI.class.getName()).log(Level.SEVERE, null, ex);
                     }
+                        
+                     } // End If Condition for Lines File Extension
                     
+                                     else {
+               
+                   JOptionPane.showMessageDialog(null, "File Extension Must be CSV !","Hey!", JOptionPane.ERROR_MESSAGE);
+                  System.out.println("Not CSV");
+                  }
+                     
+                     
                     }
                     
                   }
