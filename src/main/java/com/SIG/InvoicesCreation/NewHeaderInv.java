@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package com.SIG.InvoicesCreation;
 
 import com.SIG.View.SIGMainUI;
@@ -40,8 +37,6 @@ public class NewHeaderInv extends JDialog{
         add(InvoiceDateL);
       //  InvoiceDateL.setText("Invoice Date");
         add(InvoiceDate);
-        
-       
         add(OkBTN);
         add(CancelBTN);
         pack();

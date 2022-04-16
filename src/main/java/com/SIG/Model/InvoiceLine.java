@@ -4,6 +4,8 @@
  */
 package com.SIG.Model;
 
+import java.util.ArrayList;
+
 
 
 /**
@@ -59,6 +61,7 @@ public class InvoiceLine {
         return itemPrice * itemCount;
     }
     
+ 
     public String saveInvLineDataToCSV(){
             return "" + getInvHeader().getInvoiceNumber() + "," + getItemName() +"," + getItemPrice() +"," +getItemCount();
     }

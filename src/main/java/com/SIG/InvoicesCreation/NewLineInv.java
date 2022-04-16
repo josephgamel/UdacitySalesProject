@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package com.SIG.InvoicesCreation;
 
 import com.SIG.View.SIGMainUI;
@@ -32,7 +29,6 @@ public class NewLineInv extends JDialog{
         LineItemNameL = new JLabel("Item Name");
         LineItemPriceL = new JLabel("Item Price");
         LineItemCountL = new JLabel("Item Count");
-        
         LineItemName = new JTextField(20);
         LineItemPrice = new JTextField(20);
         LineItemCount = new JTextField(20);
@@ -40,25 +36,19 @@ public class NewLineInv extends JDialog{
         CancelBTNNewLine = new JButton("Cancel");
         OkBTNNewLine.setActionCommand("NewInvLineOkBTN");
         CancelBTNNewLine.setActionCommand("NewInvLineCancelBTN");
-        
         OkBTNNewLine.addActionListener(mainView);
         CancelBTNNewLine.addActionListener(mainView);
         setLayout(new GridLayout(4,2));
         //add(CustomerNameL);
         add(LineItemNameL);
         add(LineItemName);
-        
         add(LineItemPriceL);
         add(LineItemPrice);
-        
         add(LineItemCountL);
         add(LineItemCount);
-      
-       
         add(OkBTNNewLine);
         add(CancelBTNNewLine);
         pack();
-        
     }
 
     public JTextField getLineItemName() {

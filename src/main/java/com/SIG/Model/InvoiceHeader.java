@@ -4,6 +4,8 @@
  */
 package com.SIG.Model;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -16,6 +18,7 @@ public class InvoiceHeader {
     private Date InvoiceDate;
     private String CustomerName;
     private ArrayList<InvoiceLine> invLine;
+    private DateFormat CustomDateFormat= new SimpleDateFormat("dd-MM-yyyy");
     public InvoiceHeader(int InvoiceNumber, Date InvoiceDate, String CustomerName) {
         this.InvoiceNumber = InvoiceNumber;
         this.InvoiceDate = InvoiceDate;
@@ -61,12 +64,13 @@ public class InvoiceHeader {
     {
         double total = 0.0;
         for (InvoiceLine Line : getInvLines()) {
-            total += Line.getItemPrice();
+            total += Line.getItemTotal();
         }
         return total;
     }
     
     public String saveInvHeaderDataToCSV(){
-            return "" + getInvoiceNumber() +"," + getInvoiceDate() +"," +getCustomerName();
+     
+            return "" + getInvoiceNumber() +"," + CustomDateFormat.format(getInvoiceDate()) +"," +getCustomerName();
     }
 }

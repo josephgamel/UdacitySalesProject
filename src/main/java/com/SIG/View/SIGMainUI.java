@@ -42,6 +42,20 @@ public class SIGMainUI extends javax.swing.JFrame implements ActionListener , Li
      */
     public SIGMainUI() {
         initComponents();
+        JOptionPane.showMessageDialog(this, "Welcome to 'Sales Invoice Generator' Application "
+        + "\n" + "hera are Some Tips to Use your App"
+        );
+        
+        JOptionPane.showMessageDialog(this, "First Load Invoice Header and Invoice Line Files"
+        + "\n" + "from 'File' Menu"
+        );
+        
+         JOptionPane.showMessageDialog(this, "then you Can Add and Delete Invoice."
+        + "\n" + "or you Can Add and Delete Invoice Line."
+         + "\n" + "Finally you Can Save the New Data to CSV Files."
+        );
+       
+      JOptionPane.showMessageDialog(this, "Let's Go :) ");
     }
     
     /**
@@ -98,6 +112,11 @@ public class SIGMainUI extends javax.swing.JFrame implements ActionListener , Li
 
         DeleteInvoice.setText("Delete Invoice");
         DeleteInvoice.setActionCommand("DeleteInvoice");
+        DeleteInvoice.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DeleteInvoiceActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Invoice Number");
 
@@ -194,17 +213,15 @@ public class SIGMainUI extends javax.swing.JFrame implements ActionListener , Li
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 401, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(12, 12, 12)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 401, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(CreateInvoice)
-                                .addGap(18, 18, 18)
-                                .addComponent(DeleteInvoice)))))
+                        .addGap(47, 47, 47)
+                        .addComponent(CreateInvoice)
+                        .addGap(50, 50, 50)
+                        .addComponent(DeleteInvoice)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -233,16 +250,21 @@ public class SIGMainUI extends javax.swing.JFrame implements ActionListener , Li
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2)
-                    .addComponent(LineInvNum))
-                .addGap(15, 15, 15)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(LineInvNum))
+                        .addGap(15, 15, 15))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel1)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(15, 15, 15)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(33, 33, 33)
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(CreateInvoice)
                             .addComponent(DeleteInvoice)))
@@ -286,34 +308,15 @@ public class SIGMainUI extends javax.swing.JFrame implements ActionListener , Li
         // TODO add your handling code here:
     }//GEN-LAST:event_CreateInvoiceActionPerformed
 
+    private void DeleteInvoiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteInvoiceActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_DeleteInvoiceActionPerformed
+
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(SIGMainUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(SIGMainUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(SIGMainUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(SIGMainUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
+        
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new SIGMainUI().setVisible(true);
@@ -371,15 +374,13 @@ public class SIGMainUI extends javax.swing.JFrame implements ActionListener , Li
                 break;
             
              case "DeleteLine" :
-                deleteInvLine();
+                DeleteInvLine();
                 break;
                 
              case "SaveItem" :
                 ShowNewLineScreen();
                 break;
-             case "CancelItem" :
-                CancelChanges();
-                break;
+            
             case "NewInvOkBTN" :
                 SaveNewInvData();
                 break;
@@ -397,15 +398,14 @@ public class SIGMainUI extends javax.swing.JFrame implements ActionListener , Li
                 
                
             default:
-                System.out.println("Defffault");
+                System.out.println("Nothing Selecteds");
         }
-     //   throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+     }
     
-    // Functioooooooooooons 
+    // Load Invoice Header File 
     private void LoadInvHeaderFile(){
         JFileChooser fileChoose = new JFileChooser();
-        
+        JOptionPane.showMessageDialog(this, "Select Invoice Header File");
         // Read Invoice Header File
         int choosenHeaderFile = fileChoose.showOpenDialog(this);
         if (choosenHeaderFile == JFileChooser.APPROVE_OPTION) {
@@ -439,14 +439,9 @@ public class SIGMainUI extends javax.swing.JFrame implements ActionListener , Li
                         Logger.getLogger(SIGMainUI.class.getName()).log(Level.SEVERE, null, ex);
                     }
                     
-                // Read Line Invoice File    
-                    
+                // Start Reading Line Invoice File    
        
-               
-                
-           
-                
-                  // JFileChooser fileChoose1 = new JFileChooser();
+                 JOptionPane.showMessageDialog(this, "Select Invoice Lines File");
                     
                     int choosenLineFile = fileChoose.showOpenDialog(this);
                     if (choosenLineFile == JFileChooser.APPROVE_OPTION) {
@@ -469,12 +464,7 @@ public class SIGMainUI extends javax.swing.JFrame implements ActionListener , Li
                             InvoiceHeader header = getInvDetailsByNum(invLineNumber);
                             InvoiceLine  invoiceL = new InvoiceLine(header, lineItemsCount, lineItemPrice, lineItemName);
                             header.getInvLines().add(invoiceL);
-                            
-                        // Date date = Date.valueOf(invoiceDateValue);
                             System.out.println("Line Items Data are : Inv Num - "+invLineNumber +" , item name "+ lineItemName+ " item Price "+ lineItemPrice + " Item Count "+lineItemsCount);
-                            
-                        //  InvoiceHeader invHeader = new InvoiceHeader(invoiceHeaderNumber, invoiceHeaderDate, invoiceCusName1);
-                         // invHeaderList.add(invHeader);
                         }  
                         LineFile.close();
                         bfLine.close();
@@ -539,11 +529,7 @@ public class SIGMainUI extends javax.swing.JFrame implements ActionListener , Li
         
     }
     
-
-    private void CancelChanges() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
+    // Function for "Create New Invoice" Button
     private void SaveNewInvData() {
         String newCustomerName = newInv.getCustomerName().getText();
         String newInvDateValue = newInv.getInvoiceDate().getText();
@@ -605,10 +591,6 @@ public class SIGMainUI extends javax.swing.JFrame implements ActionListener , Li
        InvoiceLine invL = new InvoiceLine(invHead, ItemCount, ItemPrice, Itemname);
         
         invHead.addInvoiceLine(invL);
-       
-      //  invLTable.getInvLines().add(invL);
-        
-        
         LineInvTotal.setText(""+invHead.getInvHeaderTotal());
       invLTable.fireTableDataChanged();
         invHTable.fireTableDataChanged();
@@ -616,7 +598,7 @@ public class SIGMainUI extends javax.swing.JFrame implements ActionListener , Li
     
     }
 
-    private void deleteInvLine() {
+    private void DeleteInvLine() {
         int lineIndex = InvoicesLineTable.getSelectedRow();
     InvoiceLine i =  invLTable.getInvLines().get(lineIndex);
         invLTable.getInvLines().remove(lineIndex);
@@ -640,7 +622,8 @@ public class SIGMainUI extends javax.swing.JFrame implements ActionListener , Li
            LineCusName.setText("");
            LineInvTotal.setText("");
     }
-
+    
+    // Save Data to New Invoices Header File and Invoices Line File
     private void SaveToCSV() {
         String header ="";
         String lines = "";
