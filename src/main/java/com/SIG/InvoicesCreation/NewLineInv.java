@@ -63,9 +63,4 @@ public class NewLineInv extends JDialog{
         return LineItemCount;
     }
 
-    
-   
-
- 
-    
 }

@@ -30,8 +30,7 @@ public class InvHeaderTable extends AbstractTableModel{
        return invList.size();
     }
 
-   
-
+  
     @Override
     public int getColumnCount() {
         return 4;
@@ -108,9 +107,5 @@ public class InvHeaderTable extends AbstractTableModel{
         }
     }
 
-    @Override
-    public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
+   
 }
