@@ -1,6 +1,7 @@
 
 package com.SIG.Model;
 
+import com.SIG.View.SIGMainUI;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -67,7 +68,7 @@ public class InvoiceHeader {
     }
     
     public String saveInvHeaderDataToCSV(){
-     
+
             return "" + getInvoiceNumber() +"," + CustomDateFormat.format(getInvoiceDate()) +"," +getCustomerName();
     }
 }

@@ -14,9 +14,9 @@ public class InvHeaderTable extends AbstractTableModel{
     private DateFormat CustomDateFormat= new SimpleDateFormat("dd-MM-yyyy");
     private List <InvoiceHeader> invList;
 
-    public InvHeaderTable() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+//    public InvHeaderTable() {
+//        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+//    }
 
     public List<InvoiceHeader> getInvList() {
         return invList;

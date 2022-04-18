@@ -19,10 +19,6 @@ public class NewLineInv extends JDialog{
     private JTextField LineItemName;
     private JTextField LineItemPrice;
     private JTextField LineItemCount;
-    
-    
-    
-    
     private JLabel  LineItemNo;
     private JLabel  LineItemNameL;
     private JLabel  LineItemPriceL;
@@ -45,8 +41,6 @@ public class NewLineInv extends JDialog{
         LineItemNameL.setBorder(new CompoundBorder(borderLineName, margin));
         LineItemPriceL.setBorder(new CompoundBorder(borderLinePrice, margin));
         LineItemCountL.setBorder(new CompoundBorder(borderLineCount, margin));
-        
-        
         
         
         LineItemName = new JTextField(20);

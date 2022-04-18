@@ -19,7 +19,6 @@ import java.util.Date;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.Clock;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -40,20 +39,20 @@ public class SIGMainUI extends javax.swing.JFrame implements ActionListener , Li
      */
     public SIGMainUI() {
         initComponents();
-//        JOptionPane.showMessageDialog(this, "Welcome to 'Sales Invoice Generator' Application "
-//        + "\n" + "hera are Some Tips to Use your App"
-//        );
-//        
-//        JOptionPane.showMessageDialog(this, "First Load Invoice Header and Invoice Line Files"
-//        + "\n" + "from 'File' Menu"
-//        );
-//        
-//         JOptionPane.showMessageDialog(this, "then you Can Add and Delete Invoice."
-//        + "\n" + "or you Can Add and Delete Invoice Line."
-//         + "\n" + "Finally you Can Save the New Data to CSV Files."
-//        );
-//       
-//      JOptionPane.showMessageDialog(this, "Let's Go :) ");
+        JOptionPane.showMessageDialog(this, "Welcome to 'Sales Invoice Generator' Application "
+        + "\n" + "here are Some Tips to Use your App"
+        );
+        
+        JOptionPane.showMessageDialog(this, "First Load Invoice Header and Invoice Line Files"
+        + "\n" + "from 'File' Menu"
+        );
+        
+         JOptionPane.showMessageDialog(this, "then you Can Add and Delete Invoice."
+        + "\n" + "or you Can Add and Delete Invoice Line."
+         + "\n" + "Finally you Can Save the New Data to CSV Files."
+        );
+       
+      JOptionPane.showMessageDialog(this, "Let's Go :) ");
     }
     
     /**
@@ -363,7 +362,7 @@ public class SIGMainUI extends javax.swing.JFrame implements ActionListener , Li
                 SaveToCSV();
                 break;
              case "CreateInvoice" :
-                getNewInvData();
+                 getNewInvData();
                 break;
              case "DeleteInvoice" :
                 DeleteInvHeader();
@@ -378,6 +377,7 @@ public class SIGMainUI extends javax.swing.JFrame implements ActionListener , Li
                 break;
             
             case "NewInvOkBTN" :
+                
                 SaveNewInvData();
                 break;
             case "NewInvCancelBTN" :
@@ -400,7 +400,7 @@ public class SIGMainUI extends javax.swing.JFrame implements ActionListener , Li
     // Load Invoice Header File 
     private void LoadInvHeaderFile(){
         JFileChooser fileChoose = new JFileChooser();
-        JOptionPane.showMessageDialog(this, "Select Invoice Header File" +"\n" +"Date Format Should be --> dd-MM-yyyy");
+        JOptionPane.showMessageDialog(this, "Select Invoice Header File");
         // Read Invoice Header File
         int choosenHeaderFile = fileChoose.showOpenDialog(this);
         if (choosenHeaderFile == JFileChooser.APPROVE_OPTION) {
@@ -415,7 +415,7 @@ public class SIGMainUI extends javax.swing.JFrame implements ActionListener , Li
                         FileReader readHFile = new FileReader(headerFile);
                         BufferedReader bfHeader = new BufferedReader(readHFile);
                         String line = null;
-                            try {
+                            
                                 System.out.println("*************************");
                                 System.out.println("Invoice Header Data are ==>  : ");
                                 System.out.println("*************************");
@@ -426,26 +426,17 @@ public class SIGMainUI extends javax.swing.JFrame implements ActionListener , Li
                                     String invoiceCusName = FileContent[2];
 
                                     int invoiceHeaderNumber = Integer.parseInt(invoiceNumValue);
-                                   Date invoiceHeaderDate= CustomDateFormat.parse(invoiceDateValue);
-                                   
-
-                                // Date date = Date.valueOf(invoiceDateValue);
-                                   // System.out.println("Invoice Header File Data are ==>  :" + "\n"+ " Invpice Num --> "+ invoiceHeaderNumber + "\n" + " Invoice Date --> "+ invoiceDateValue+ "\n" +" Invoice Customer Name --> "+ invoiceCusName);
-
+                              
+                                    
+                                  Date invoiceHeaderDate= CustomDateFormat.parse(invoiceDateValue);                      
                                   InvoiceHeader invHeader = new InvoiceHeader(invoiceHeaderNumber, invoiceHeaderDate, invoiceCusName);
                                   invHeaderList.add(invHeader);
-                                  System.out.println("Invpice Num --> "+ invoiceHeaderNumber + "\t" + " Invoice Date --> "+ invoiceDateValue+ "\t" +" Invoice Customer Name --> "+ invoiceCusName);
+                                  System.out.println("Invoice Number --> "+ invoiceHeaderNumber + "\t" + " Invoice Date --> "+ invoiceDateValue+ "\t" +" Invoice Customer Name --> "+ invoiceCusName);
                                   
                                 }  
 
                                 readHFile.close();
                                 bfHeader.close();
-                            } catch (IOException ex) {
-                                Logger.getLogger(SIGMainUI.class.getName()).log(Level.SEVERE, null, ex);
-                            } catch (ParseException ex) {
-                                Logger.getLogger(SIGMainUI.class.getName()).log(Level.SEVERE, null, ex);
-                            }
-
                 // Start Reading Line Invoice File    
        
                  JOptionPane.showMessageDialog(this, "Select Invoice Lines File");
@@ -461,8 +452,7 @@ public class SIGMainUI extends javax.swing.JFrame implements ActionListener , Li
                             FileReader LineFile = new FileReader(lineFile);
                             BufferedReader bfLine= new BufferedReader(LineFile);
                             String linex = null;
-                        try {
-                            
+                       
                             System.out.println("----------------------------------");
                             System.err.println("\n");
                             System.out.println("*************************");
@@ -490,11 +480,9 @@ public class SIGMainUI extends javax.swing.JFrame implements ActionListener , Li
                        invHTable= new InvHeaderTable(invHeaderList);
                        HeaderInvTable.setModel(invHTable);
                        HeaderInvTable.validate();
-                    } catch (IOException ex) {
-                        Logger.getLogger(SIGMainUI.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+                        }                 
                         
-                     } // End If Condition for Lines File Extension
+                      // End If Condition for Lines File Extension
                     
                      else {
                             JOptionPane.showMessageDialog(null, "File Extension Must be CSV !","Hey!", JOptionPane.ERROR_MESSAGE);
@@ -503,14 +491,19 @@ public class SIGMainUI extends javax.swing.JFrame implements ActionListener , Li
                      
                     } // End If Condiotion for Approved Lines File Option
                     
-                  }
-                  else {
-                      JOptionPane.showMessageDialog(null, "File Extension Must be CSV !","Hey!", JOptionPane.ERROR_MESSAGE);
-                      System.out.println("Not CSV");
-                  }
+                  
+                  
+            }
             } catch (FileNotFoundException ex) {
                  JOptionPane.showMessageDialog(null, "Error! File Not Found ","Hey!", JOptionPane.ERROR_MESSAGE);
-                Logger.getLogger(SIGMainUI.class.getName()).log(Level.SEVERE, null, ex);
+              //  Logger.getLogger(SIGMainUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            catch (IOException ex) {
+                System.err.println("IO Exception");
+            } 
+            catch (ParseException ex) {
+                //Logger.getLogger(SIGMainUI.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(null, "Date Format is Not Correct","Hey!", JOptionPane.ERROR_MESSAGE);
             }
             
             } //End If Condiotion for Approved Header File Option
@@ -571,14 +564,19 @@ public class SIGMainUI extends javax.swing.JFrame implements ActionListener , Li
            // System.out.println("Inv Date  :  " +newInvDate);
             InvoiceHeader newInvObj = new InvoiceHeader(newInvNum, newInvDate, newCustomerName);
             invHeaderList.add(newInvObj);
-            System.out.println("Date are : Inv Date is - "+ newInvDate +  "and Num is - "+newInvNum + "and Name is -  "+newCustomerName);
+            System.out.println("Date are : Invoice Date is - "+ newInvDate +  "and Num is - "+newInvNum + "and Name is -  "+newCustomerName);
             newInv.setVisible(false);
             invHTable.fireTableDataChanged();
-            JOptionPane.showMessageDialog(this, "Now , Select row from Invoices Table to Add Invoice Items");
+            //JOptionPane.showMessageDialog(this, "Now , Select row from Invoices Table to Add Invoice Items");
             
         } catch (ParseException ex) {
-            Logger.getLogger(SIGMainUI.class.getName()).log(Level.SEVERE, null, ex);
+             JOptionPane.showMessageDialog(null, "Error! Date Format is Not Correct","Hey!", JOptionPane.ERROR_MESSAGE);
+             System.err.println("Date Errrrror");
         }
+//         catch (NullPointerException e){
+//        
+//           JOptionPane.showMessageDialog(null, "Nulllll Ponter !","Hey!", JOptionPane.ERROR_MESSAGE);
+//        }
 
     }
 
@@ -609,35 +607,63 @@ public class SIGMainUI extends javax.swing.JFrame implements ActionListener , Li
     }
 
     private void SaveNewLineData() {
+       
+       try{
         String Itemname = newLineInv.getLineItemName().getText();
         double ItemPrice =Double.parseDouble(newLineInv.getLineItemPrice().getText());
         int ItemCount =Integer.parseInt(newLineInv.getLineItemCount().getText());
         newLineInv.setVisible(false);
         System.out.println("Data ==>  name "+Itemname + " - price " + ItemPrice + " - count " +  ItemCount );
         int headerIndex =HeaderInvTable.getSelectedRow();
-       //HeaderInvTable
-       // System.out.println("CURRENT : " + headerIndex);
        InvoiceHeader invHead =  invHTable.getInvList().get(headerIndex);
        InvoiceLine invL = new InvoiceLine(invHead, ItemCount, ItemPrice, Itemname);
        invHead.addInvoiceLine(invL);
        LineInvTotal.setText(""+invHead.getInvHeaderTotal());
        invLTable.fireTableDataChanged();
        invHTable.fireTableDataChanged();
+       }
+        catch (IndexOutOfBoundsException e){
+        
+           JOptionPane.showMessageDialog(null, "Please, First Select Invoice row from Invoices Table","Hey!", JOptionPane.ERROR_MESSAGE);
+        }
+        
 
     }
 
     private void DeleteInvLine() {
         int lineIndex = InvoicesLineTable.getSelectedRow();
-    InvoiceLine i =  invLTable.getInvLines().get(lineIndex);
+        try{
+         InvoiceLine i =  invLTable.getInvLines().get(lineIndex);
         invLTable.getInvLines().remove(lineIndex);
         invLTable.fireTableDataChanged();
         invHTable.fireTableDataChanged();
         LineInvTotal.setText(""+i.getItemTotal());
+        }
+        catch (IndexOutOfBoundsException e){
+            System.out.println("Line "+lineIndex);
+            if(lineIndex ==0){
+           JOptionPane.showMessageDialog(null, "No Rows to Delete","Hey!", JOptionPane.ERROR_MESSAGE);
+             }
+             else{
+                JOptionPane.showMessageDialog(null, "Please Select Invoice Line row to Delete","Hey!", JOptionPane.ERROR_MESSAGE);
+
+             }
+        }
+         catch (NullPointerException e){
+            int HeaderRows = HeaderInvTable.getRowCount();
+              if(HeaderRows !=0){
+           JOptionPane.showMessageDialog(null, "No Rows to Delete","Hey!", JOptionPane.ERROR_MESSAGE);
+             }
+             else{
+            JOptionPane.showMessageDialog(null, "Please Load Files First","Hey!", JOptionPane.ERROR_MESSAGE);
+              }
+        }
+        
     }
 
     private void DeleteInvHeader() {
         int invHindex = HeaderInvTable.getSelectedRow();
-        InvoiceHeader invH = invHTable.getInvList().get(invHindex);
+        try{InvoiceHeader invH = invHTable.getInvList().get(invHindex);
         invHTable.getInvList().remove(invH);
         invHTable.fireTableDataChanged();
         invLTable = new InvLineTable(new ArrayList<InvoiceLine>());
@@ -646,12 +672,22 @@ public class SIGMainUI extends javax.swing.JFrame implements ActionListener , Li
         LineInvNum.setText("");
         LineInvDate.setText("");
         LineCusName.setText("");
-        LineInvTotal.setText("");
+        LineInvTotal.setText("");}
+        catch (IndexOutOfBoundsException e){
+        
+           JOptionPane.showMessageDialog(null, "Please Select row to Delete !","Hey!", JOptionPane.ERROR_MESSAGE);
+        }
+         catch (NullPointerException e){
+        
+           JOptionPane.showMessageDialog(null, "Please Load Files First !","Hey!", JOptionPane.ERROR_MESSAGE);
+        }
+        
     }
     
     // Save Data to New Invoices Header File and Invoices Line File
     private void SaveToCSV() {
         String header ="";
+        
         String lines = "";
         for (InvoiceHeader inH : invHeaderList)
         {
@@ -665,38 +701,30 @@ public class SIGMainUI extends javax.swing.JFrame implements ActionListener , Li
         }
         JOptionPane.showMessageDialog(this, "Select Header File to Save");
         JFileChooser filechoose = new JFileChooser();
-        System.out.println("VALUEEEEE 00000"+filechoose.toString());
-      
         int selectedFile = filechoose.showSaveDialog(this);
        
-//       if (selectedFile == 0){
-//           System.err.println("Errrrror");
-//       }
         if (selectedFile == JFileChooser.APPROVE_OPTION) {
            File headerFileSaving =  filechoose.getSelectedFile();
            
            String headerFileFormat= headerFileSaving.getAbsolutePath();
-            if (headerFileFormat != null) {
-                 System.out.println("TEEEEEEEEEST 0000: "+headerFileFormat);
-            }
-                      boolean IsHeaderExtensionSavingCSV=  FilenameUtils.isExtension(headerFileFormat, "csv");
-                        System.out.println("Writing Header Format is : "+IsHeaderExtensionSavingCSV);
-               if (IsHeaderExtensionSavingCSV==true) {
-                               try {
+//            if (headerFileFormat != null) {
+//                 System.out.println("TEEEEEEEEEST 0000: "+headerFileFormat);
+//            }
+           boolean IsHeaderExtensionSavingCSV=  FilenameUtils.isExtension(headerFileFormat, "csv");
+           System.out.println("Writing Header Format is : "+IsHeaderExtensionSavingCSV);
+           if (IsHeaderExtensionSavingCSV==true) {
+                try {
                       FileWriter headerFileWrite = new FileWriter(headerFileSaving);
-                         headerFileWrite.write(header);
+                      headerFileWrite.write(header);
                       headerFileWrite.flush();
-                         headerFileWrite.close();
-                        int selectedLinesFile = filechoose.showSaveDialog(this);
-                         if (selectedLinesFile == JFileChooser.APPROVE_OPTION) {
+                      headerFileWrite.close();
+                      int selectedLinesFile = filechoose.showSaveDialog(this);
+                      if (selectedLinesFile == JFileChooser.APPROVE_OPTION) {
                             File linesFile =  filechoose.getSelectedFile();
-
                             String lineSavFileFormat= linesFile.getAbsolutePath();
-                             System.out.println("TEEEEEEEEEST : "+lineSavFileFormat);
                             boolean IsLinesExtensionSavingCSV=  FilenameUtils.isExtension(lineSavFileFormat, "csv");
                             System.out.println("Writing Lines Format is : "+IsLinesExtensionSavingCSV);
                                 if (IsLinesExtensionSavingCSV==true) {
-
                                  FileWriter linesFileWrite = new FileWriter(linesFile);
                                  linesFileWrite.write(lines);
                                  linesFileWrite.flush();
@@ -712,11 +740,11 @@ public class SIGMainUI extends javax.swing.JFrame implements ActionListener , Li
                 
                         }  // End of Try
                         catch (FileNotFoundException ex) {
-                                JOptionPane.showMessageDialog(null, "Error! File Not Found ","Hey!", JOptionPane.ERROR_MESSAGE);
+                                JOptionPane.showMessageDialog(null, "Error! Folder path is not found","Hey!", JOptionPane.ERROR_MESSAGE);
                         } 
                         catch (IOException ex) {
-                            System.err.println("dddddddddd");
-                                Logger.getLogger(SIGMainUI.class.getName()).log(Level.SEVERE, null, ex);
+                            System.err.println("File not Found");
+                            //Logger.getLogger(SIGMainUI.class.getName()).log(Level.SEVERE, null, ex);
                         }
                    
                     }
@@ -730,5 +758,7 @@ public class SIGMainUI extends javax.swing.JFrame implements ActionListener , Li
            
     }  // End Save Function
     
+    
+ 
     
 } // End of MAIN Class

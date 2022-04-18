@@ -58,7 +58,7 @@ public class InvoiceLine {
     
  
     public String saveInvLineDataToCSV(){
-            return "" + getInvHeader().getInvoiceNumber() + "," + getItemName() +"," + getItemPrice() +"," +getItemCount();
+            return "" +getInvHeader().getInvoiceNumber() + "," + getItemName() +"," + getItemPrice() +"," +getItemCount();
     }
     
 }
