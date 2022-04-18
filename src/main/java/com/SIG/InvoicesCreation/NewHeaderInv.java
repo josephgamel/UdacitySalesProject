@@ -7,7 +7,9 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
-
+import javax.swing.border.Border;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.EmptyBorder;
 /**
  *
  * @author amirm
@@ -22,6 +24,14 @@ public class NewHeaderInv extends JDialog{
     public NewHeaderInv(SIGMainUI mainView) {
         CustomerNameL = new JLabel("Customer name");
         InvoiceDateL = new JLabel("Date");
+        
+        //Set Left Margin 
+        Border border= CustomerNameL.getBorder();
+        Border border1= InvoiceDateL.getBorder();
+        Border margin = new EmptyBorder(0,20,0,0);
+        CustomerNameL.setBorder(new CompoundBorder(border, margin));
+        InvoiceDateL.setBorder(new CompoundBorder(border1, margin));
+
         CustomerName = new JTextField(20);
         InvoiceDate = new JTextField(20);
         OkBTN = new JButton("OK");
@@ -51,8 +61,5 @@ public class NewHeaderInv extends JDialog{
         return InvoiceDate;
     }
 
-   
-
- 
     
 }

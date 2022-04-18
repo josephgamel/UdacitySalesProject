@@ -7,6 +7,9 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.border.Border;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.EmptyBorder;
 
 /**
  *
@@ -16,6 +19,9 @@ public class NewLineInv extends JDialog{
     private JTextField LineItemName;
     private JTextField LineItemPrice;
     private JTextField LineItemCount;
+    
+    
+    
     
     private JLabel  LineItemNo;
     private JLabel  LineItemNameL;
@@ -29,6 +35,20 @@ public class NewLineInv extends JDialog{
         LineItemNameL = new JLabel("Item Name");
         LineItemPriceL = new JLabel("Item Price");
         LineItemCountL = new JLabel("Item Count");
+        
+        
+        //Set Left Margin 
+        Border borderLineName= LineItemNameL.getBorder();
+        Border borderLinePrice= LineItemPriceL.getBorder();
+        Border borderLineCount= LineItemCountL.getBorder();
+        Border margin = new EmptyBorder(0,20,0,0);
+        LineItemNameL.setBorder(new CompoundBorder(borderLineName, margin));
+        LineItemPriceL.setBorder(new CompoundBorder(borderLinePrice, margin));
+        LineItemCountL.setBorder(new CompoundBorder(borderLineCount, margin));
+        
+        
+        
+        
         LineItemName = new JTextField(20);
         LineItemPrice = new JTextField(20);
         LineItemCount = new JTextField(20);

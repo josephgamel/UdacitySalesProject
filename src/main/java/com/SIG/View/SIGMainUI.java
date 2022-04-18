@@ -19,6 +19,7 @@ import java.util.Date;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.Clock;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -399,7 +400,7 @@ public class SIGMainUI extends javax.swing.JFrame implements ActionListener , Li
     // Load Invoice Header File 
     private void LoadInvHeaderFile(){
         JFileChooser fileChoose = new JFileChooser();
-        JOptionPane.showMessageDialog(this, "Select Invoice Header File");
+        JOptionPane.showMessageDialog(this, "Select Invoice Header File" +"\n" +"Date Format Should be --> dd-MM-yyyy");
         // Read Invoice Header File
         int choosenHeaderFile = fileChoose.showOpenDialog(this);
         if (choosenHeaderFile == JFileChooser.APPROVE_OPTION) {
@@ -416,7 +417,7 @@ public class SIGMainUI extends javax.swing.JFrame implements ActionListener , Li
                         String line = null;
                             try {
                                 System.out.println("*************************");
-                                System.out.println("Invoice Header File Data are ==>  : ");
+                                System.out.println("Invoice Header Data are ==>  : ");
                                 System.out.println("*************************");
                                 while ((line = bfHeader.readLine()) != null) {
                                     String[] FileContent = line.split(",");
@@ -426,6 +427,7 @@ public class SIGMainUI extends javax.swing.JFrame implements ActionListener , Li
 
                                     int invoiceHeaderNumber = Integer.parseInt(invoiceNumValue);
                                    Date invoiceHeaderDate= CustomDateFormat.parse(invoiceDateValue);
+                                   
 
                                 // Date date = Date.valueOf(invoiceDateValue);
                                    // System.out.println("Invoice Header File Data are ==>  :" + "\n"+ " Invpice Num --> "+ invoiceHeaderNumber + "\n" + " Invoice Date --> "+ invoiceDateValue+ "\n" +" Invoice Customer Name --> "+ invoiceCusName);
@@ -507,7 +509,7 @@ public class SIGMainUI extends javax.swing.JFrame implements ActionListener , Li
                       System.out.println("Not CSV");
                   }
             } catch (FileNotFoundException ex) {
-                 JOptionPane.showMessageDialog(null, "Not Fooooooooound ","Hey!", JOptionPane.ERROR_MESSAGE);
+                 JOptionPane.showMessageDialog(null, "Error! File Not Found ","Hey!", JOptionPane.ERROR_MESSAGE);
                 Logger.getLogger(SIGMainUI.class.getName()).log(Level.SEVERE, null, ex);
             }
             
@@ -663,26 +665,34 @@ public class SIGMainUI extends javax.swing.JFrame implements ActionListener , Li
         }
         JOptionPane.showMessageDialog(this, "Select Header File to Save");
         JFileChooser filechoose = new JFileChooser();
+        System.out.println("VALUEEEEE 00000"+filechoose.toString());
+      
         int selectedFile = filechoose.showSaveDialog(this);
-        
+       
+//       if (selectedFile == 0){
+//           System.err.println("Errrrror");
+//       }
         if (selectedFile == JFileChooser.APPROVE_OPTION) {
            File headerFileSaving =  filechoose.getSelectedFile();
            
            String headerFileFormat= headerFileSaving.getAbsolutePath();
-           boolean IsHeaderExtensionSavingCSV=  FilenameUtils.isExtension(headerFileFormat, "csv");
+            if (headerFileFormat != null) {
+                 System.out.println("TEEEEEEEEEST 0000: "+headerFileFormat);
+            }
+                      boolean IsHeaderExtensionSavingCSV=  FilenameUtils.isExtension(headerFileFormat, "csv");
                         System.out.println("Writing Header Format is : "+IsHeaderExtensionSavingCSV);
                if (IsHeaderExtensionSavingCSV==true) {
-           
-                    try {
-                         FileWriter headerFileWrite = new FileWriter(headerFileSaving);
+                               try {
+                      FileWriter headerFileWrite = new FileWriter(headerFileSaving);
                          headerFileWrite.write(header);
-                         headerFileWrite.flush();
+                      headerFileWrite.flush();
                          headerFileWrite.close();
                         int selectedLinesFile = filechoose.showSaveDialog(this);
                          if (selectedLinesFile == JFileChooser.APPROVE_OPTION) {
                             File linesFile =  filechoose.getSelectedFile();
 
                             String lineSavFileFormat= linesFile.getAbsolutePath();
+                             System.out.println("TEEEEEEEEEST : "+lineSavFileFormat);
                             boolean IsLinesExtensionSavingCSV=  FilenameUtils.isExtension(lineSavFileFormat, "csv");
                             System.out.println("Writing Lines Format is : "+IsLinesExtensionSavingCSV);
                                 if (IsLinesExtensionSavingCSV==true) {
@@ -701,9 +711,14 @@ public class SIGMainUI extends javax.swing.JFrame implements ActionListener , Li
                
                 
                         }  // End of Try
+                        catch (FileNotFoundException ex) {
+                                JOptionPane.showMessageDialog(null, "Error! File Not Found ","Hey!", JOptionPane.ERROR_MESSAGE);
+                        } 
                         catch (IOException ex) {
-                            Logger.getLogger(SIGMainUI.class.getName()).log(Level.SEVERE, null, ex);
+                            System.err.println("dddddddddd");
+                                Logger.getLogger(SIGMainUI.class.getName()).log(Level.SEVERE, null, ex);
                         }
+                   
                     }
                     else {
                           JOptionPane.showMessageDialog(null, "Selected Header File Extension Must be CSV !","Hey!", JOptionPane.ERROR_MESSAGE);
